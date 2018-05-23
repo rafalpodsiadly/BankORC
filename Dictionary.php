@@ -35,28 +35,32 @@ class Dictionary
             $word = '';
             while (($line = fgets($file)) !== false) {
                 $linesTmp[] = $line;
-                 if (count($linesTmp) == $this->height ) {
-                     for ($i=0; $i<=9; $i++) {
-                         $wodrTmp = "";
-                         for($row=0; $row <= $this->width; $row++) {
-                            $wodrTmp .=
-                             $linesTmp[$row][$this->width*$i]
-                             .$linesTmp[$row][$this->width*$i+1]
-                             .$linesTmp[$row][$this->width*$i+2];
-                         }
+                if (count($linesTmp) == $this->height ) {
+                    for ($i=0; $i<=9; $i++) {
+                        $wodrTmp = "";
+                        for($row=0; $row <= $this->width; $row++) {
+                            //  var_dump($linesTmp);
+                               $wodrTmp .=
+                                $linesTmp[$row][$this->width*$i]
+                                .$linesTmp[$row][$this->width*$i+1]
+                                .$linesTmp[$row][$this->width*$i+2];
+
+                        }
                         if (isset($this->words[$wodrTmp])) {
                             $word .= $this->words[$wodrTmp];
+                        } else {
+                            $word .= '0';
                         }
                      }
                      $linesTmp = array();
                      $word.= ' ';
                  };
              }
-             return $word;
+             echo $word;
         }
     }
 }
 
 $dictonary = new Dictionary();
 $dictonary->generateWorsByFile('dic.txt');
-echo $dictonary->decodeFile('temp.txt');
+echo $dictonary->decodeFile('test2.txt');
